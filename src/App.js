@@ -22,26 +22,28 @@ class App extends Component {
       }))
   }
 
-  addToFavorites = (character) => {
-    this.setState({
-      favorites: [...this.state.favorites, character]
-    })
+  removeFavorite = (character) => {
+    let favorites = this.state.favorites.filter(favorite => favorite !== character)
 
-    // fetch('favoritesURL', {
-    //   method: 'POST',
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(character)
-    // })
+    this.setState({favorites})
+  }
+
+  addToFavorites = (character) => {
+    let foundCharacter = this.state.favorites.find(favorite => character.id === favorite.id)
+    
+    if(!foundCharacter){
+      this.setState({
+        favorites: [...this.state.favorites, character]
+      })
+    }
   }
 
   
   render(){
     return (
       <div className="App">
-        <Favorites favorites={this.state.favorites} />
-        <CharacterList addToFavorites={this.addToFavorites} characters={this.state.characters}/>
+        <Favorites clickAction={this.removeFavorite} favorites={this.state.favorites} />
+        <CharacterList clickAction={this.addToFavorites} characters={this.state.characters}/>
       </div>
     );
   }

@@ -1,13 +1,9 @@
 import React from 'react'
+import Card from './Card'
 
-export default function CharacterList({characters, addToFavorites}){
+export default function CharacterList({characters, clickAction}){
 
-    const showCharacters = () => characters.map(character => (
-        <li>
-          <h2>{character.name}</h2>
-          <img src={character.image} onClick={() => addToFavorites(character)}/>
-        </li>
-    ))
+    const showCharacters = () => characters.map(character => <Card character={character} clickAction={clickAction} />)
 
     return (
         <ul className="character-list">

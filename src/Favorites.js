@@ -1,13 +1,9 @@
 import React from 'react'
-import Card from './Card'
 
-export default function Favorites({favorites, clickAction}){
-
-    const showCharacters = () => favorites.map(character => <Card clickAction={clickAction} character={character} />)
+export default function Favorites(props){
 
     return (
         <ul className="favorites-list">
-            {showCharacters()}
         </ul>
     )
 }
